@@ -1,0 +1,48 @@
+# Python / IDE
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vscode/
+.idea/
+
+# Local credentials and runtime state
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+*.pem
+*.key
+postgres-password
+*.log
+*.pid
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql.gz
+
+# Licensed source data and external model caches
+data/aruba/
+data/models/
+.cache/
+*.safetensors
+*.incomplete
+
+# Historical checkpoints; retain the small self-trained current checkpoint
+data/har/*.pt
+!data/har/aruba-gru-v3.pt
+
+# Archives and unrelated exercise bundles
+*.zip
+*.7z
+*.rar
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

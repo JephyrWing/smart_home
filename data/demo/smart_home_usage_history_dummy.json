@@ -1,0 +1,881 @@
+{
+  "schema_version": 2,
+  "source": "synthetic",
+  "source_kind": "dummy_usage",
+  "record_type": "device_usage_session",
+  "timezone": "Asia/Seoul",
+  "description": "실측 센서나 실제 기기 실행 로그가 아닌, 두 가상 사용자의 일관된 사용 패턴을 보여 주기 위한 합성 기기 사용 세션이다. 레코드는 사용한 구조화 설정의 시연 근거이며 임베딩 벡터는 포함하지 않는다.",
+  "request_text_semantics": "request_text는 각 합성 세션에 대응하는 가상의 사용자 명령이다. 실제 사용자가 전송한 명령이나 실제 API 실행 성공을 뜻하지 않는다.",
+  "settings_semantics": "settings는 해당 합성 세션에서 사용한 설정이다. power=true는 켜진 상태이며 brightness_pct=null은 밝기를 지정하지 않은 켜기 사용이다. ended_at은 사용 맥락의 종료 시각일 뿐 별도의 끄기 명령을 뜻하지 않는다.",
+  "period": {
+    "start_date": "2026-10-26",
+    "end_date": "2026-11-08"
+  },
+  "users": {
+    "A": {
+      "name": "사용자 A",
+      "pattern_summary": "평일에는 이른 아침 주방에서 식사를 준비한다. 매일 거실에서 조용히 쉬며 어두운 조명을 사용하고, 주말 밤에는 침실 조명을 더 낮춰 취침을 준비한다. 야간 서재 업무 기록은 없다."
+    },
+    "B": {
+      "name": "사용자 B",
+      "pattern_summary": "매일 저녁 거실에서 책이나 영상을 보며 밝은 조명 아래 휴식한다. 평일 늦은 밤에는 서재 스마트 플러그에 노트북을 연결해 작업하고, 주말에는 식당 조명을 켜고 저녁 식사를 한다."
+    }
+  },
+  "context_labels": {
+    "relax": "휴식",
+    "morning": "아침 식사 준비",
+    "bedtime": "취침 준비",
+    "work": "야간 작업",
+    "eating": "저녁 식사"
+  },
+  "embedding": {
+    "model": "intfloat/multilingual-e5-small",
+    "dimensions": 384,
+    "text_field": "memory_text",
+    "document_prefix": "passage: ",
+    "query_prefix": "query: ",
+    "owner_field": "owner_id"
+  },
+  "records": [
+    {
+      "record_id": "A-20261026-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-10-26T06:34:00+09:00",
+      "ended_at": "2026-10-26T06:59:00+09:00",
+      "memory_text": "평일 06:34~06:59, 주방 전등을 켜고 출근 전에 토스트와 따뜻한 커피를 준비했다.",
+      "request_text": "아침 식사를 준비할 거야. 주방 전등을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261026-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-26T19:28:00+09:00",
+      "ended_at": "2026-10-26T20:15:00+09:00",
+      "memory_text": "평일 19:28~20:15, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 따뜻한 차를 마시며 소파에서 조용히 쉬었다.",
+      "request_text": "거실에서 휴식할 거야. 거실 전등 밝기를 30%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261026-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-26T21:17:00+09:00",
+      "ended_at": "2026-10-26T22:02:00+09:00",
+      "memory_text": "평일 21:17~22:02, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 소파에서 잡지를 읽으며 저녁 휴식을 취했다.",
+      "request_text": "거실에서 휴식하려고 해. 거실 전등 밝기를 70%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261026-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-10-26T22:32:00+09:00",
+      "ended_at": "2026-10-26T23:23:00+09:00",
+      "memory_text": "평일 22:32~23:23, 서재 스마트 플러그를 켜고 늦은 밤 서재에서 노트북을 연결하고 업무 문서를 정리했다.",
+      "request_text": "밤에 서재에서 노트북으로 작업할 거야. 서재 스마트 플러그를 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261027-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-10-27T06:41:00+09:00",
+      "ended_at": "2026-10-27T07:04:00+09:00",
+      "memory_text": "평일 06:41~07:04, 주방 전등을 켜고 이른 출근을 앞두고 달걀과 빵으로 아침을 만들었다.",
+      "request_text": "출근 전에 아침을 만들게 주방 불을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261027-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-27T19:25:00+09:00",
+      "ended_at": "2026-10-27T20:13:00+09:00",
+      "memory_text": "평일 19:25~20:13, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 잔잔한 음악을 들으며 저녁 휴식 시간을 보냈다.",
+      "request_text": "편하게 쉬려고 하니 거실 조명을 30%로 조절해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261027-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-27T21:22:00+09:00",
+      "ended_at": "2026-10-27T22:06:00+09:00",
+      "memory_text": "평일 21:22~22:06, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 따뜻한 음료를 마시며 여행 영상을 보고 쉬었다.",
+      "request_text": "소파에서 쉬면서 책을 볼 거야. 거실 조명을 70%로 해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261027-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-10-27T22:30:00+09:00",
+      "ended_at": "2026-10-27T23:25:00+09:00",
+      "memory_text": "평일 22:30~23:25, 서재 스마트 플러그를 켜고 서재 책상에서 노트북으로 발표 자료를 다듬는 야간 작업을 했다.",
+      "request_text": "서재에서 야간 문서 작업을 하게 스마트 플러그 전원을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261028-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-10-28T06:40:00+09:00",
+      "ended_at": "2026-10-28T07:09:00+09:00",
+      "memory_text": "평일 06:40~07:09, 주방 전등을 켜고 오트밀을 데우고 과일을 씻어 아침 식사를 준비했다.",
+      "request_text": "이른 아침 식사 준비를 위해 주방 조명을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261028-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-28T19:45:00+09:00",
+      "ended_at": "2026-10-28T20:29:00+09:00",
+      "memory_text": "평일 19:45~20:29, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 소파에 기대어 가벼운 산문을 읽으며 쉬었다.",
+      "request_text": "저녁 휴식 시간이라 거실 전등을 30% 밝기로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261028-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-28T21:18:00+09:00",
+      "ended_at": "2026-10-28T22:00:00+09:00",
+      "memory_text": "평일 21:18~22:00, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 그림이 많은 책을 넘기며 편안히 휴식했다.",
+      "request_text": "저녁 휴식을 위해 거실 전등 밝기를 70%로 조절해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261028-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-10-28T22:31:00+09:00",
+      "ended_at": "2026-10-28T23:21:00+09:00",
+      "memory_text": "평일 22:31~23:21, 서재 스마트 플러그를 켜고 밤에 서재 노트북으로 회의 메모와 다음 일정표를 정리했다.",
+      "request_text": "늦은 밤 서재 노트북을 사용할 거야. 서재 플러그를 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261029-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-10-29T06:36:00+09:00",
+      "ended_at": "2026-10-29T07:01:00+09:00",
+      "memory_text": "평일 06:36~07:01, 주방 전등을 켜고 샌드위치를 만들고 보온병에 차를 담았다.",
+      "request_text": "아침 식사를 준비할 거야. 주방 전등을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261029-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-29T19:31:00+09:00",
+      "ended_at": "2026-10-29T20:11:00+09:00",
+      "memory_text": "평일 19:31~20:11, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 하루를 마친 뒤 스트레칭을 하고 편안히 쉬었다.",
+      "request_text": "거실 소파에서 쉴 거니까 전등 밝기를 30%로 해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261029-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-29T21:25:00+09:00",
+      "ended_at": "2026-10-29T22:09:00+09:00",
+      "memory_text": "평일 21:25~22:09, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 퍼즐을 맞추면서 느긋하게 쉬었다.",
+      "request_text": "거실에서 편하게 쉴 테니 조명을 70% 밝기로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261029-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-10-29T22:24:00+09:00",
+      "ended_at": "2026-10-29T23:25:00+09:00",
+      "memory_text": "평일 22:24~23:25, 서재 스마트 플러그를 켜고 서재에서 노트북 충전기를 연결하고 개인 프로젝트 자료를 검토했다.",
+      "request_text": "서재 책상에서 노트북 작업을 할 테니 스마트 플러그를 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261030-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-10-30T06:46:00+09:00",
+      "ended_at": "2026-10-30T07:10:00+09:00",
+      "memory_text": "평일 06:46~07:10, 주방 전등을 켜고 출근 준비 중 간단한 수프와 토스트를 만들었다.",
+      "request_text": "출근 전에 아침을 만들게 주방 불을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261030-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-30T19:38:00+09:00",
+      "ended_at": "2026-10-30T20:27:00+09:00",
+      "memory_text": "평일 19:38~20:27, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 부드러운 음악과 함께 눈을 쉬게 하며 휴식했다.",
+      "request_text": "거실에서 휴식할 거야. 거실 전등 밝기를 30%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261030-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-30T21:19:00+09:00",
+      "ended_at": "2026-10-30T21:57:00+09:00",
+      "memory_text": "평일 21:19~21:57, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 취미 잡지를 읽고 음악을 들으며 휴식했다.",
+      "request_text": "거실에서 휴식하려고 해. 거실 전등 밝기를 70%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261030-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-10-30T22:33:00+09:00",
+      "ended_at": "2026-10-30T23:32:00+09:00",
+      "memory_text": "평일 22:33~23:32, 서재 스마트 플러그를 켜고 늦은 시간 서재 노트북으로 표 계산 문서를 수정했다.",
+      "request_text": "밤에 서재에서 노트북으로 작업할 거야. 서재 스마트 플러그를 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261031-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-31T16:34:00+09:00",
+      "ended_at": "2026-10-31T17:10:00+09:00",
+      "memory_text": "주말 16:34~17:10, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 담요를 덮고 소파에서 조용한 휴식을 즐겼다.",
+      "request_text": "편하게 쉬려고 하니 거실 조명을 30%로 조절해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261031-eating",
+      "owner_id": "B",
+      "context_key": "eating",
+      "device_id": "dining.light",
+      "started_at": "2026-10-31T18:25:00+09:00",
+      "ended_at": "2026-10-31T19:04:00+09:00",
+      "memory_text": "주말 18:25~19:04, 식당 전등을 켜고 주말 저녁 식탁을 차리고 따뜻한 식사를 했다.",
+      "request_text": "저녁 식사를 하려고 하니 식당 전등을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261031-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-10-31T20:40:00+09:00",
+      "ended_at": "2026-10-31T21:20:00+09:00",
+      "memory_text": "주말 20:40~21:20, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 거실 탁자에서 사진 앨범을 보며 쉬었다.",
+      "request_text": "소파에서 쉬면서 책을 볼 거야. 거실 조명을 70%로 해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261031-bedtime",
+      "owner_id": "A",
+      "context_key": "bedtime",
+      "device_id": "bedroom.light",
+      "started_at": "2026-10-31T22:14:00+09:00",
+      "ended_at": "2026-10-31T22:35:00+09:00",
+      "memory_text": "주말 22:14~22:35, 방 1 전등이 켜진 상태에서 밝기를 20%로 맞춘 뒤 주말 일과를 마치고 침대에서 짧게 책을 읽으며 취침을 준비했다.",
+      "request_text": "취침 준비를 할 거야. 방 1 전등 밝기를 20%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 20
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261101-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-01T16:43:00+09:00",
+      "ended_at": "2026-11-01T17:31:00+09:00",
+      "memory_text": "주말 16:43~17:31, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 따뜻한 음료를 마시며 가벼운 영상을 보고 쉬었다.",
+      "request_text": "저녁 휴식 시간이라 거실 전등을 30% 밝기로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261101-eating",
+      "owner_id": "B",
+      "context_key": "eating",
+      "device_id": "dining.light",
+      "started_at": "2026-11-01T18:21:00+09:00",
+      "ended_at": "2026-11-01T18:56:00+09:00",
+      "memory_text": "주말 18:21~18:56, 식당 전등을 켜고 주말 저녁 식탁에서 수프와 빵을 먹으며 여유롭게 식사했다.",
+      "request_text": "주말 저녁 식탁을 차릴 거야. 식당 불을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261101-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-01T20:45:00+09:00",
+      "ended_at": "2026-11-01T21:25:00+09:00",
+      "memory_text": "주말 20:45~21:25, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 가벼운 예능 영상을 보며 주말 휴식을 즐겼다.",
+      "request_text": "저녁 휴식을 위해 거실 전등 밝기를 70%로 조절해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261101-bedtime",
+      "owner_id": "A",
+      "context_key": "bedtime",
+      "device_id": "bedroom.light",
+      "started_at": "2026-11-01T22:24:00+09:00",
+      "ended_at": "2026-11-01T22:44:00+09:00",
+      "memory_text": "주말 22:24~22:44, 방 1 전등이 켜진 상태에서 밝기를 20%로 맞춘 뒤 잠들기 전에 가볍게 스트레칭하고 조용히 취침을 준비했다.",
+      "request_text": "잠자리에 들기 전에 침실 전등 밝기를 20%로 해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 20
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261102-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-11-02T06:34:00+09:00",
+      "ended_at": "2026-11-02T06:55:00+09:00",
+      "memory_text": "평일 06:34~06:55, 주방 전등을 켜고 아침 도시락을 챙기고 따뜻한 음료를 준비했다.",
+      "request_text": "이른 아침 식사 준비를 위해 주방 조명을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261102-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-02T19:29:00+09:00",
+      "ended_at": "2026-11-02T20:12:00+09:00",
+      "memory_text": "평일 19:29~20:12, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 차분한 분위기에서 호흡을 가다듬으며 휴식했다.",
+      "request_text": "거실 소파에서 쉴 거니까 전등 밝기를 30%로 해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261102-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-02T21:16:00+09:00",
+      "ended_at": "2026-11-02T22:00:00+09:00",
+      "memory_text": "평일 21:16~22:00, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 소파에서 만화책을 읽으며 편안히 쉬었다.",
+      "request_text": "거실에서 편하게 쉴 테니 조명을 70% 밝기로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261102-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-11-02T22:35:00+09:00",
+      "ended_at": "2026-11-02T23:31:00+09:00",
+      "memory_text": "평일 22:35~23:31, 서재 스마트 플러그를 켜고 서재 책상에서 노트북을 연결해 온라인 강의 내용을 정리했다.",
+      "request_text": "서재에서 야간 문서 작업을 하게 스마트 플러그 전원을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261103-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-11-03T06:42:00+09:00",
+      "ended_at": "2026-11-03T07:01:00+09:00",
+      "memory_text": "평일 06:42~07:01, 주방 전등을 켜고 요거트와 과일을 준비하고 커피를 내렸다.",
+      "request_text": "아침 식사를 준비할 거야. 주방 전등을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261103-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-03T19:49:00+09:00",
+      "ended_at": "2026-11-03T20:24:00+09:00",
+      "memory_text": "평일 19:49~20:24, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 소파에서 가족과 낮은 목소리로 이야기하며 쉬었다.",
+      "request_text": "거실에서 휴식할 거야. 거실 전등 밝기를 30%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261103-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-03T21:23:00+09:00",
+      "ended_at": "2026-11-03T22:09:00+09:00",
+      "memory_text": "평일 21:23~22:09, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 차를 마시며 여행 사진을 정리하고 휴식했다.",
+      "request_text": "거실에서 휴식하려고 해. 거실 전등 밝기를 70%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261103-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-11-03T22:32:00+09:00",
+      "ended_at": "2026-11-03T23:30:00+09:00",
+      "memory_text": "평일 22:32~23:30, 서재 스마트 플러그를 켜고 야간에 서재 노트북으로 작성 중인 보고서를 마무리했다.",
+      "request_text": "늦은 밤 서재 노트북을 사용할 거야. 서재 플러그를 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261104-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-11-04T06:46:00+09:00",
+      "ended_at": "2026-11-04T07:07:00+09:00",
+      "memory_text": "평일 06:46~07:07, 주방 전등을 켜고 달걀을 삶고 빵을 구워 아침 식사를 챙겼다.",
+      "request_text": "출근 전에 아침을 만들게 주방 불을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261104-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-04T19:45:00+09:00",
+      "ended_at": "2026-11-04T20:28:00+09:00",
+      "memory_text": "평일 19:45~20:28, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 책장을 넘기다가 잠시 눈을 감고 휴식했다.",
+      "request_text": "편하게 쉬려고 하니 거실 조명을 30%로 조절해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261104-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-04T21:10:00+09:00",
+      "ended_at": "2026-11-04T21:55:00+09:00",
+      "memory_text": "평일 21:10~21:55, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 음악을 들으며 간단한 종이 공예로 휴식했다.",
+      "request_text": "소파에서 쉬면서 책을 볼 거야. 거실 조명을 70%로 해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261104-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-11-04T22:22:00+09:00",
+      "ended_at": "2026-11-04T23:25:00+09:00",
+      "memory_text": "평일 22:22~23:25, 서재 스마트 플러그를 켜고 서재에서 노트북을 충전하며 개발 문서와 예제 코드를 읽었다.",
+      "request_text": "서재 책상에서 노트북 작업을 할 테니 스마트 플러그를 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261105-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-11-05T06:31:00+09:00",
+      "ended_at": "2026-11-05T06:53:00+09:00",
+      "memory_text": "평일 06:31~06:53, 주방 전등을 켜고 출근 전에 죽을 데우고 식기를 준비했다.",
+      "request_text": "이른 아침 식사 준비를 위해 주방 조명을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261105-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-05T19:46:00+09:00",
+      "ended_at": "2026-11-05T20:23:00+09:00",
+      "memory_text": "평일 19:46~20:23, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 조용한 음악을 배경으로 하루를 돌아보며 쉬었다.",
+      "request_text": "저녁 휴식 시간이라 거실 전등을 30% 밝기로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261105-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-05T21:22:00+09:00",
+      "ended_at": "2026-11-05T21:59:00+09:00",
+      "memory_text": "평일 21:22~21:59, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 퍼즐 책을 펼쳐 놓고 천천히 쉬었다.",
+      "request_text": "저녁 휴식을 위해 거실 전등 밝기를 70%로 조절해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261105-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-11-05T22:28:00+09:00",
+      "ended_at": "2026-11-05T23:20:00+09:00",
+      "memory_text": "평일 22:28~23:20, 서재 스마트 플러그를 켜고 늦은 밤 서재 노트북으로 설계 메모와 발표 순서를 정리했다.",
+      "request_text": "밤에 서재에서 노트북으로 작업할 거야. 서재 스마트 플러그를 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261106-morning",
+      "owner_id": "A",
+      "context_key": "morning",
+      "device_id": "kitchen.light",
+      "started_at": "2026-11-06T06:52:00+09:00",
+      "ended_at": "2026-11-06T07:14:00+09:00",
+      "memory_text": "평일 06:52~07:14, 주방 전등을 켜고 간단한 샐러드와 토스트로 아침 식사를 준비했다.",
+      "request_text": "아침 식사를 준비할 거야. 주방 전등을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261106-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-06T19:36:00+09:00",
+      "ended_at": "2026-11-06T20:22:00+09:00",
+      "memory_text": "평일 19:36~20:22, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 편안히 앉아 차를 마시며 저녁 휴식을 취했다.",
+      "request_text": "거실 소파에서 쉴 거니까 전등 밝기를 30%로 해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261106-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-06T21:13:00+09:00",
+      "ended_at": "2026-11-06T21:57:00+09:00",
+      "memory_text": "평일 21:13~21:57, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 영상 속 풍경을 보며 느긋하게 휴식했다.",
+      "request_text": "거실에서 편하게 쉴 테니 조명을 70% 밝기로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261106-work",
+      "owner_id": "B",
+      "context_key": "work",
+      "device_id": "office.plug",
+      "started_at": "2026-11-06T22:29:00+09:00",
+      "ended_at": "2026-11-06T23:32:00+09:00",
+      "memory_text": "평일 22:29~23:32, 서재 스마트 플러그를 켜고 서재 책상에서 노트북을 연결하고 주간 업무 기록을 정리했다.",
+      "request_text": "서재에서 야간 문서 작업을 하게 스마트 플러그 전원을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261107-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-07T16:45:00+09:00",
+      "ended_at": "2026-11-07T17:33:00+09:00",
+      "memory_text": "주말 16:45~17:33, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 소파에서 짧은 에세이를 읽고 여유롭게 쉬었다.",
+      "request_text": "거실에서 휴식할 거야. 거실 전등 밝기를 30%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261107-eating",
+      "owner_id": "B",
+      "context_key": "eating",
+      "device_id": "dining.light",
+      "started_at": "2026-11-07T18:15:00+09:00",
+      "ended_at": "2026-11-07T18:54:00+09:00",
+      "memory_text": "주말 18:15~18:54, 식당 전등을 켜고 주말 저녁 식탁에 반찬을 놓고 천천히 식사했다.",
+      "request_text": "저녁 식사를 하려고 하니 식당 전등을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261107-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-07T20:32:00+09:00",
+      "ended_at": "2026-11-07T21:13:00+09:00",
+      "memory_text": "주말 20:32~21:13, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 그림책을 살펴보면서 주말 저녁에 쉬었다.",
+      "request_text": "거실에서 휴식하려고 해. 거실 전등 밝기를 70%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261107-bedtime",
+      "owner_id": "A",
+      "context_key": "bedtime",
+      "device_id": "bedroom.light",
+      "started_at": "2026-11-07T22:12:00+09:00",
+      "ended_at": "2026-11-07T22:31:00+09:00",
+      "memory_text": "주말 22:12~22:31, 방 1 전등이 켜진 상태에서 밝기를 20%로 맞춘 뒤 침대 옆에서 내일 챙길 물건을 정리하며 취침을 준비했다.",
+      "request_text": "취침 준비를 할 거야. 방 1 전등 밝기를 20%로 맞춰 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 20
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261108-relax",
+      "owner_id": "A",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-08T16:41:00+09:00",
+      "ended_at": "2026-11-08T17:21:00+09:00",
+      "memory_text": "주말 16:41~17:21, 거실 전등이 켜진 상태에서 밝기를 30%로 맞춘 뒤 한 주를 마무리하며 음악을 듣고 조용히 휴식했다.",
+      "request_text": "편하게 쉬려고 하니 거실 조명을 30%로 조절해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 30
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261108-eating",
+      "owner_id": "B",
+      "context_key": "eating",
+      "device_id": "dining.light",
+      "started_at": "2026-11-08T18:33:00+09:00",
+      "ended_at": "2026-11-08T19:08:00+09:00",
+      "memory_text": "주말 18:33~19:08, 식당 전등을 켜고 주말 저녁 식탁에서 간단한 한 끼를 먹고 식기를 정리했다.",
+      "request_text": "주말 저녁 식탁을 차릴 거야. 식당 불을 켜 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": null
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "B-20261108-relax",
+      "owner_id": "B",
+      "context_key": "relax",
+      "device_id": "living.light",
+      "started_at": "2026-11-08T20:32:00+09:00",
+      "ended_at": "2026-11-08T21:16:00+09:00",
+      "memory_text": "주말 20:32~21:16, 거실 전등이 켜진 상태에서 밝기를 70%로 맞춘 뒤 소파에서 사진집을 읽으며 한 주의 휴식을 마무리했다.",
+      "request_text": "소파에서 쉬면서 책을 볼 거야. 거실 조명을 70%로 해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 70
+      },
+      "source_kind": "dummy_usage"
+    },
+    {
+      "record_id": "A-20261108-bedtime",
+      "owner_id": "A",
+      "context_key": "bedtime",
+      "device_id": "bedroom.light",
+      "started_at": "2026-11-08T22:18:00+09:00",
+      "ended_at": "2026-11-08T22:42:00+09:00",
+      "memory_text": "주말 22:18~22:42, 방 1 전등이 켜진 상태에서 밝기를 20%로 맞춘 뒤 잔잔한 음악을 들으며 몸을 편안히 하고 취침을 준비했다.",
+      "request_text": "잠자리에 들기 전에 침실 전등 밝기를 20%로 해 줘.",
+      "settings": {
+        "power": true,
+        "brightness_pct": 20
+      },
+      "source_kind": "dummy_usage"
+    }
+  ]
+}
