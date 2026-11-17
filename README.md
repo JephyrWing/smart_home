@@ -1,5 +1,7 @@
 # Local AI Smart Home
 
+> **프로젝트 보고서:** [보고서 다운로드 (PPTX)](SmartHome_Project_Report_Redesigned.pptx)
+
 **사용자의 말과 과거 사용 기록, 센서 이벤트를 함께 활용하는 로컬 AI 스마트홈 MVP**입니다. 자연어로 가상 기기를 제어하고, 사용자별 기록에서 설정을 검색해 적용하며, 환경 센서의 시간 순서로 집 안의 활동을 추정합니다.
 
 | 항목 | 내용 |
@@ -170,7 +172,7 @@ DB 준비 셀은 PostgreSQL 컨테이너·영속 볼륨과 누락된 앱 시드�
 | [smarthome_validation.py](smarthome_validation.py) | 검증 함수, 대역, 격리 DB 도우미, 날짜별 구현·실행 관측 기록 |
 | [SMART_HOME_MVP_DESIGN.md](SMART_HOME_MVP_DESIGN.md) | MVP 범위와 정책·API·개인화 계약 |
 | [HAR_TUNING_REPORT.md](HAR_TUNING_REPORT.md) | 이전 v1·v2 HAR 튜닝·검증 기록 |
-| [SmartHome_Project_Report.pptx](docs/SmartHome_Project_Report.pptx) | 프로젝트 소개·구조·모델 평가·시연·트러블슈팅 발표 자료 |
+| [SmartHome_Project_Report.pptx](SmartHome_Project_Report_Redesigned.pptx) | 프로젝트 소개·구조·모델 평가·시연·트러블슈팅 발표 자료 |
 | [data/demo/smart_home_usage_history_dummy.json](data/demo/smart_home_usage_history_dummy.json) | 개인정보가 아닌 합성 사용 기록 56건 |
 | `data/har/aruba-gru-v3.pt` | 로컬 학습한 v3 가중치·전처리·평가 메타데이터 |
 | `data/aruba/`, `data/models/` | 별도로 준비하는 원본 데이터와 외부 모델 캐시 · Git 제외 |
